@@ -9,7 +9,11 @@ import { SitDeploymentComponent } from './sit-deployment/sit-deployment.componen
 import {ToastModule} from 'primeng/toast';
 import {HttpClientModule} from '@angular/common/http';
 import {MessageService} from 'primeng/api';
+import {ConfirmationService} from 'primeng/api';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ButtonModule, MultiSelectModule, SelectButtonModule} from 'primeng/primeng';
+import {FormsModule} from '@angular/forms';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 
 export const routes: Routes = [
@@ -26,12 +30,17 @@ export const routes: Routes = [
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ToastModule,
     HttpClientModule,
+    FormsModule,
+    ToastModule,
+    ButtonModule,
     BrowserAnimationsModule,
+    SelectButtonModule,
+    MultiSelectModule,
+    ConfirmDialogModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [MessageService],
+  providers: [MessageService, ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

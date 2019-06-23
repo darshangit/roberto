@@ -1,8 +1,13 @@
 <progress *ngIf="isPackageCreated" class="progress is-small is-danger" max="100">15%</progress>
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+
+<p class="has-text-centered has-margin">
+  <p-selectButton [options]="types" [(ngModel)]="selectedTypes" multiple="multiple"></p-selectButton>
+</p>
 
 <nav class="level">
   <p class="level-item has-text-centered ">
-    <a class="button is-danger is-outlined is-focused" (click)="createPackage()">Create Package</a>
+    <button pButton class="ui-button-raised ui-button-danger" type="button" icon="fas fa-cubes" (click)="createPackage()" [disabled]="isPackageCreated || selectedTypes.length === 0" label="Create Package"></button>
   </p>
 </nav>
 
