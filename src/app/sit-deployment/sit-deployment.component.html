@@ -1,0 +1,9 @@
+<progress *ngIf="isDeployed" class="progress is-small is-primary" max="100">15%</progress>
+
+<nav class="level">
+  <p class="level-item has-text-centered">
+    <a class="button is-primary is-focused" (click)="deployToSIT()">Deploy</a>
+  </p>
+</nav>
+
+<p-toast styleClass="custom-toast" key="success" position="top-right"></p-toast>
