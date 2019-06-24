@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ConfirmationService, Message, MessageService, SelectItem} from 'primeng/api';
+import {ServiceIntegratorService} from '../service/service-integrator.service';
 
 @Component({
   selector: 'app-sit-deployment',
@@ -8,11 +9,12 @@ import {ConfirmationService, Message, MessageService, SelectItem} from 'primeng/
 })
 export class SitDeploymentComponent implements OnInit {
 
-  isDeployed = false;
+  isISPDeployed = false;
+  isASGDeployed = false;
   selectedTypes: string[] = [];
   types: SelectItem[];
 
-  constructor(private messageService: MessageService, private confirmationService: ConfirmationService) { }
+  constructor(private messageService: MessageService, private confirmationService: ConfirmationService, private serviceIntegrator: ServiceIntegratorService) { }
 
   ngOnInit() {
     this.types = [
@@ -30,13 +32,35 @@ export class SitDeploymentComponent implements OnInit {
       accept: () => {
         this.messageService.clear();
 
-        this.isDeployed = true;
+        this.selectedTypes.forEach(type => {
 
-        setTimeout(() => {
-          this.isDeployed = false;
-          this.selectedTypes = [];
-          this.toast('success', 'success', 'Wohoo !!!', 'Successfully Deployed on SIT', true);
-        }, 3000);
+          if (type === 'ISP') {
+            this.isISPDeployed = true;
+
+            this.serviceIntegrator.deployISP().subscribe(resp => {
+              console.log('ISP Deployed', resp);
+              this.isISPDeployed = false;
+              this.toast('success', 'success', 'Wohoo !!!', 'Successfully Deployed ISP to SIT', true);
+            }, () => {
+              this.isISPDeployed = false;
+              this.toast('success', 'error', 'Failed !!!', 'Failed Deploying ISP to SIT', true);
+            });
+
+
+          } else if (type === 'ASG') {
+            this.isASGDeployed = true;
+
+            this.serviceIntegrator.deployASG().subscribe(resp => {
+              console.log('ASG Deployed', resp);
+              this.isASGDeployed = false;
+              this.toast('success', 'success', 'Wohoo !!!', 'Successfully Deployed ASG to SIT', true);
+            }, () => {
+              this.isASGDeployed = false;
+
+              this.toast('success', 'error', 'Failed !!!', 'Failed Deploying ASG to SIT', true);
+            });
+          }
+        });
         },
       reject: () => {
       }

@@ -30,11 +30,11 @@ export const routes: Routes = [
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     ToastModule,
     ButtonModule,
-    BrowserAnimationsModule,
     SelectButtonModule,
     MultiSelectModule,
     ConfirmDialogModule,

@@ -1,4 +1,6 @@
-<progress *ngIf="isPackageCreated" class="progress is-small is-danger" max="100">15%</progress>
+<progress *ngIf="isISPPackageCreated" class="progress is-small is-danger" max="100">15%</progress>
+<progress *ngIf="isASGPackageCreated" class="progress is-small is-danger" max="100">15%</progress>
+
 <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
 
 <p class="has-text-centered has-margin">
@@ -7,10 +9,12 @@
 
 <nav class="level">
   <p class="level-item has-text-centered ">
-    <button pButton class="ui-button-raised ui-button-danger" type="button" icon="fas fa-cubes" (click)="createPackage()" [disabled]="isPackageCreated || selectedTypes.length === 0" label="Create Package"></button>
+    <button pButton class="ui-button-raised ui-button-danger" type="button" icon="fas fa-cubes" (click)="createPackage()" [disabled]="isISPPackageCreated || isASGPackageCreated || selectedTypes.length === 0" label="Create Package"></button>
   </p>
 </nav>
 
 <p-toast styleClass="custom-toast" key="custom" position="top-center"></p-toast>
+<p-toast styleClass="error" key="error" position="top-right"></p-toast>
+
 
 
